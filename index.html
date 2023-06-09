@@ -10,10 +10,10 @@
         background-attachment: fixed;
         background-size: cover;
         margin: 0px;
+        color: white;
       }
       body article {
         /*opacity:0.7;*/
-        background-color: rgb(0,0,0,0.3);
       }
       body article header h1 {
         text-align: center;
@@ -22,27 +22,61 @@
         margin: 0px;
         padding-top: 3%;
         padding-bottom: 3%;
+        background-color: rgb(0,0,0,0.3);
       }
-      body article section {
+      body article header div {
+        height: 25px;
+        background: linear-gradient(rgb(0, 0, 0, 0.3), rgb(0,0,0,0.1));
+      }
+      /*body article section {
         position: absolute;
         top: 40%;
         left: 40%;
-      }
-      body article section ul {
+      }*/
+      /*body article section ul {
         text-align:center;
-        padding: 20px;
-        background-color: rgb(0,0,0,0.3);
         color:white;
+      }*/
+      body article section div {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        text-align: center;
+        border: 1px solid white;
+        border-radius: 5px;
+        margin: 10px;
+        padding: 10px;
+      }
+      body article section div h2 {
+        font-size: 30px;
+      }
+      body article section div span {
+        font-size: 25px;
       }
       body article section ul h2 {
         font-size: 30px;
+        text-align: center;
+        border: 3px solid rgb(0, 0, 0, 0.7);
+        border-radius: 10px;
+        background-color: rgb(0, 0, 0, 0.6);
       }
       body article section ul li {
+        position: absolute;
         font-size:26px;
         list-style-type: none;
-        border:1px solid white;
-        margin: 25px;
-        padding: 25px;
+        border:1px solid none;
+        margin: 45px;
+        padding: 10px 45px 45px 45px;
+        border-radius: 10px;
+        background-color: rgb(0,0,0,0.3);
+      }
+      #passage {
+        left: 30%;
+        top: 40%;
+      }
+      #game {
+        right: 30%;
+        top: 40%;
       }
       a:link {
         text-decoration: none;
@@ -64,7 +98,8 @@
         color:wheat;
         font-style: italic;
         position: absolute;
-        bottom: 0px;
+        left: 2px;
+        bottom: 2px;
       }
       body article footer span {
         background-color: rgb(0,0,0,0.3);
@@ -77,6 +112,15 @@
         background-color: white;
       }*/
     </style>
+    <script>
+      window.onload = function(){
+        var target_time = new Date("2024/6/6");
+        var need_time_ms = target_time.getTime() - Date.now();
+        var need_time_day = parseInt(need_time_ms / 1000 / 3600 / 24);
+        //window.alert(need_time_day);
+        document.getElementById("day").innerHTML = need_time_day;
+      }
+    </script>
     <link rel="icon" type="image/x-icon" href="./icon/favicon.ico" />
   </head>
   <body>
@@ -86,21 +130,24 @@
       </nav>-->
       <header>
         <h1>欢迎访问 ZLF 的主页！</h1>
+        <div></div>
       </header>
       <section>
+        <div>
+          <h2>高考倒计时</h2>
+          <span id="day"></span><span>天</span>
+        </div>
+      </section>
+      <section>
         <ul>
-          <h2>可选的内容</h2>
-          <li>
-            <span>文章：</span>
-            <span>
-              <a href="./articles/反梁宣言/article.html" target="_blank">反梁宣言</a>
-            </span>
+          <!--<h2>可选的内容</h2>-->
+          <li id="passage">
+            <h2>文章</h2>
+            <a href="./articles/反梁宣言/article.html" target="_blank">反梁宣言</a>
           </li>
-          <li>
-            <span>游戏：</span>
-            <span>
-              <a href="./Res/Tetris.html" target="_blank">俄罗斯方块</a>
-            </span>
+          <li id="game">
+            <h2>游戏</h2>
+            <a href="./Res/Tetris.html" target="_blank">俄罗斯方块</a>
           </li>
         </ul>
       </section>
