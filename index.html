@@ -85,6 +85,12 @@
       #game {
         right: 2%;
       }
+      #countdown {
+        background-color: rgb(0, 0, 0, 0.7);
+      }
+      #countdown-icon {
+        background-color: rgb(0, 0, 0, 0.7);
+      }
       a:link {
         text-decoration: none;
         color: white;
@@ -112,29 +118,51 @@
         background-color: rgb(0,0,0,0.3);
         padding: 9px;
       }
+      #countdown-icon.hover:after {
+        content: "高考倒计时";
+        position: relative;
+        top: 100%;
+        background-color: black;
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 14px;
+      }
       /*body article nav a {
         color:black;
         margin: 5px;
         padding: 15px;
         background-color: white;
-      }*/
+      } */
     </style>
     <script>
       window.onload = function(){
+        if ( window.innerWidth >= 1255 ){
+          document.getElementById("countdown-icon").style.display = "none";
+          document.getElementById("countdown").style.display = "block";
+        }else{
+          document.getElementById("countdown-icon").style.display = "block";
+          document.getElementById("countdown").style.display = "none";
+        }
         var target_time = new Date("2024/6/6");
         var need_time_ms = target_time.getTime() - Date.now();
         var need_time_day = parseInt(need_time_ms / 1000 / 3600 / 24);
         //window.alert(need_time_day);
         document.getElementById("day").innerHTML = need_time_day;
-      }
-      window.onresize = function(){
-        var wwid = window.innerWidth;
-        if (wwid < 1250) {
+        document.getElementById("countdown-icon").addEventListener("click", function() {
+          document.getElementById("countdown").style.display = "block";
+          document.getElementById("countdown-icon").style.display = "none";
+        });
+        document.getElementById("countdown").addEventListener("click", function(){
           document.getElementById("countdown").style.display = "none";
-        }
-        if (wwid > 1249) {
-          document.getElementById("countdown").style.display = "";
-        }
+          document.getElementById("countdown-icon").style.display = "block";
+        });
+        document.getElementById("countdown-icon").addEventListener("mouseover", function() {
+          this.classList.add("hover");
+        });
+        document.getElementById("countdown-icon").addEventListener("mouseout", function() {
+          this.classList.remove("hover");
+        });
       }
     </script>
     <link rel="icon" type="image/x-icon" href="./icon/favicon.ico" />
@@ -149,6 +177,11 @@
         <div id="countdown">
           <h2>高考倒计时</h2>
           <span id="day"></span><span>天</span>
+        </div>
+        <div id="countdown-icon">
+          <svg class="icon" style="width: 1.044921875em;height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1070 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1871">
+            <path d="M232.820364 248.552727A418.909091 418.909091 0 1 0 558.545455 93.090909a46.545455 46.545455 0 0 1 0-93.090909c282.763636 0 512 229.236364 512 512s-229.236364 512-512 512S46.545455 794.763636 46.545455 512c0-123.810909 43.938909-237.288727 117.015272-325.818182H0V93.090909h279.272727l93.090909 232.727273-93.090909 46.545454-46.452363-123.810909zM605.090909 465.454545h139.636364a46.545455 46.545455 0 0 1 0 93.09091h-186.181818a46.545455 46.545455 0 0 1-46.545455-46.545455V302.545455a46.545455 46.545455 0 0 1 93.090909 0V465.454545z" fill="#E47F10" opacity=".8" p-id="1872"></path>
+          </svg>
         </div>
       </section>
       <section>
