@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时钟与倒计时</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.4);
+            /* background-image: url("https://api.vvhan.com/api/wallpaper/acg"); */
+            background-image: url("https://gitee.com/asxe/image/raw/master/scenery2/210.webp");
+            background-blend-mode: multiply;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #time-render-container {
+            font-family: 'Arial', sans-serif;
+            color: white;
+            font-size: 15vw;
+            font-weight: bold;
+            border-radius: 10px;
+            border: 7px solid rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            display: inline-block;
+        }
+
+        #count-down-container {
+            position: absolute;
+            top: 0px;
+            /* right: 0px; */
+            /* bottom: 0px; */
+            width: 10vw;
+            height: 8vw;
+            background-color: rgba(128, 128, 128, 0.8);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .count-down-text {
+            font-family: 'Arial', sans-serif;
+            color: white;
+            font-size: 200%;
+            /* font-weight: bold; */
+            margin: auto;
+        }
+
+        #subtitle-container {
+            /* align-self: flex-start; */
+        }
+
+        #count-down-render-container {
+            /* align-self: flex-end; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="time-render-container"></div>
+    <div id="count-down-container">
+        <div id="subtitle-container" class="count-down-text">高考倒计时</div>
+        <div id="count-down-render-container" class="count-down-text"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time-render-container').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function updateCountDown() {
+            const now = new Date();
+            const targetDate = new Date(now.getFullYear(), 5, 6); // 6月6日，月份从0开始计数
+            if (now.getMonth() > 5 || (now.getMonth() === 5 && now.getDate() > 6)) {
+                // 如果当前日期已经过了6月6日，则设置目标日期为下一年的6月6日
+                targetDate.setFullYear(targetDate.getFullYear() + 1);
+            }
+            const oneDay = 24 * 60 * 60 * 1000; // 一天的毫秒数
+            const daysDiff = Math.ceil((targetDate.getTime() - now.getTime()) / oneDay);
+            document.getElementById('count-down-render-container').textContent = daysDiff;
+        }
+
+        // 更新时钟
+        setInterval(updateClock, 10);
+
+        // 更新倒计时
+        updateCountDown();
+        setInterval(() => {
+            const now = new Date();
+            if (now.getDate() !== new Date(now.getTime() - 60000).getDate()) {
+                updateCountDown();
+            }
+        }, 60000);
+
+        // 初始调用以确保时钟立即显示
+        updateClock();
+    </script>
+</body>
+
+</html>
